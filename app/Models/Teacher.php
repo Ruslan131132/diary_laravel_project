@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+    public function class()
+    {
+        return $this->hasOne(ClassInfo::class);
+    }
 }

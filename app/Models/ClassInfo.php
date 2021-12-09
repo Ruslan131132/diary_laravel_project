@@ -9,4 +9,9 @@ class ClassInfo extends Model
 {
     use HasFactory;
     protected $table = 'classes';
+
+    public function pupils()
+    {
+        return $this->hasMany(Pupil::class);
+    }
 }
