@@ -19,12 +19,13 @@ Route::name('user.')->group(function(){
 });
 
 Route::name('admin.')->group(function(){
-    Route::view('/admin-main', 'pages.admin.admin_main')->middleware('auth')->middleware('admin')->name('admin-main');
-    Route::view('/create-class',  'pages.admin.create_class')->middleware('auth')->middleware('admin')->name('create-class');
-    Route::view('/create-subject',  'pages.admin.create_subject')->middleware('auth')->middleware('admin')->name('create-subject');
-    Route::view('/create-employment',  'pages.admin.create_employment')->middleware('auth')->middleware('admin')->name('create-employment');
-    Route::view('/create-shedule',  'pages.admin.create-shedule')->middleware('auth')->middleware('admin')->name('create-shedule');
+    Route::view('/admin-main', 'pages.admin.main')->middleware('auth')->middleware('admin')->name('main');
+    Route::get('/admin-users', [\App\Http\Controllers\Admin\UsersController::class, 'index'])->middleware('auth')->middleware('admin')->name('users');
+    Route::view('/admin-classes',  'pages.admin.classes')->middleware('auth')->middleware('admin')->name('classes');
+    Route::view('/admin-subjects',  'pages.admin.subjects')->middleware('auth')->middleware('admin')->name('subjects');
+    Route::view('/admin-employment',  'pages.admin.employment')->middleware('auth')->middleware('admin')->name('employment');
+    Route::view('/admin-schedule',  'pages.admin.schedule')->middleware('auth')->middleware('admin')->name('schedule');
 
-    Route::post('/create-user', [\App\Http\Controllers\CreateUserController::class, 'save'])->name('create-user');;
-
+    Route::post('/create-user', [\App\Http\Controllers\Admin\UsersController::class, 'save'])->name('create-user');
+    Route::post('/delete-user', [\App\Http\Controllers\Admin\UsersController::class, 'delete'])->name('delete-user');
 });
