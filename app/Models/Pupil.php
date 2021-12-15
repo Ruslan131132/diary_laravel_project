@@ -11,7 +11,7 @@ class Pupil extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'user_id', 'id');
     }
 
     public function class()
@@ -21,7 +21,7 @@ class Pupil extends Model
 
     public function course()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'pupils_courses');
     }
 
     public function mark()
